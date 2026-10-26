@@ -1,0 +1,13 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Blokir akses langsung ke direktori internal dan data mentah.
+    RewriteRule ^(config|layout|scripts|vendor|views/data)(/|$) - [F,L,NC]
+    RewriteRule ^views/(?!login\.php$).* - [F,L,NC]
+</IfModule>
+
+<FilesMatch "(?i)^(ekinerja_db\.sql|AGENTS\.md|ARCHITECTURE\.md|CODING_GUIDELINES\.md|DATABASE\.md|DESIGN\.md|SETUP_.*\.md|composer\.(json|lock)|README\.md)$">
+    Require all denied
+</FilesMatch>

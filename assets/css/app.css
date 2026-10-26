@@ -1,0 +1,250 @@
+/**
+ * assets/css/app.css
+ * Gaya global aplikasi. Tailwind tetap dimuat dari CDN di layout/header.php.
+ */
+
+:root {
+    color-scheme: light;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Shell: gunakan dynamic viewport agar tidak terpotong address bar mobile */
+#appSidebar,
+.app-shell {
+    height: 100vh;
+    height: 100dvh;
+}
+
+body {
+    overflow-x: hidden;
+    font-feature-settings: "cv11", "ss01";
+    background-image:
+        radial-gradient(1200px 600px at 100% -10%, rgba(59, 130, 246, 0.06), transparent 60%),
+        radial-gradient(900px 500px at -10% 110%, rgba(202, 138, 4, 0.05), transparent 55%);
+    background-attachment: fixed;
+}
+
+/* Elevation & radius */
+.rounded-sm { border-radius: 8px !important; }
+.rounded-none { border-radius: 6px !important; }
+
+.shadow-sm {
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 6px 18px -10px rgba(15, 23, 42, 0.12) !important;
+}
+.shadow-md {
+    box-shadow: 0 4px 10px -2px rgba(15, 23, 42, 0.08), 0 10px 28px -12px rgba(15, 23, 42, 0.16) !important;
+}
+.shadow-lg {
+    box-shadow: 0 14px 34px -12px rgba(15, 23, 42, 0.24) !important;
+}
+.shadow-xl {
+    box-shadow: 0 28px 60px -18px rgba(15, 23, 42, 0.40) !important;
+}
+.shadow-xl.rounded-sm,
+.shadow-xl.rounded-xl {
+    overflow: hidden;
+}
+
+/* Form controls */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+select,
+textarea {
+    border-radius: 8px;
+    border-color: #dbe2ea;
+    background-color: #ffffff;
+    transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.14) !important;
+}
+
+input[type="file"] {
+    border-radius: 8px;
+    border-color: #dbe2ea;
+    background-color: #f8fafc;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+button {
+    transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+}
+button:active:not(:disabled) { transform: translateY(1px); }
+button:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+    background-clip: content-box;
+    border: 2px solid transparent;
+}
+
+/* Data tables */
+.table-compact th,
+.table-compact td {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    border-bottom: 1px solid #eef2f7;
+}
+.table-compact th { border-right: 1px solid #e8edf4; }
+.table-compact td { border-right: 1px solid #f1f5f9; }
+.table-compact td:last-child,
+.table-compact th:last-child { border-right: 0; }
+.table-compact td.p-0,
+.table-compact th.p-0 { padding: 0 !important; }
+
+.table-header th {
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.66rem;
+    letter-spacing: 0.07em;
+    border-bottom: 1px solid #d7e0ea !important;
+}
+.table-compact tbody > tr { transition: background-color 0.15s ease; }
+.table-compact tbody > tr:hover { background-color: #f8fafc; }
+
+/* Menu pengguna: bisa dibuka lewat tap di perangkat sentuh */
+#userMenu.user-menu-open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Modal */
+[class~="bg-black/50"] {
+    background-color: rgba(15, 23, 42, 0.55) !important;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+}
+
+/* Micro interaction */
+main { animation: appFadeIn 0.3s ease-out both; }
+@keyframes appFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+[class~="bg-black/50"]:not(.hidden) > div { animation: modalIn 0.22s ease-out both; }
+@keyframes modalIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+}
+@keyframes toastIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+}
+
+h1, h2, h3 { letter-spacing: -0.015em; }
+::selection { background: #dbeafe; color: #1e3a8a; }
+
+:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Tabel lebar: scroll horizontal yang nyaman di perangkat sentuh */
+.table-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-gutter: stable;
+}
+
+/* Cegah kontrol form & konten panjang merusak lebar layar kecil */
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+img,
+svg,
+video,
+canvas {
+    max-width: 100%;
+}
+.break-anywhere {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+@media (max-width: 639px) {
+    .table-compact th,
+    .table-compact td {
+        padding: 0.45rem 0.55rem;
+    }
+
+    .table-compact {
+        font-size: 0.7rem;
+    }
+
+    /* Modal tetap bisa dijangkau di layar pendek */
+    .modal-panel {
+        max-height: calc(100dvh - 1rem);
+    }
+    .modal-panel form {
+        padding: 1rem !important;
+    }
+    .modal-panel > div:first-child {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    /* Tombol aksi utama memenuhi lebar layar */
+    .mobile-action {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Print */
+@media print {
+    aside, header, .no-print { display: none !important; }
+    body { background: #fff !important; }
+    main { padding: 0 !important; animation: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main { animation: none !important; }
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
